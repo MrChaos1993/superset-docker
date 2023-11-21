@@ -23,7 +23,6 @@
 import logging
 import os
 
-from celery.schedules import crontab
 from flask_caching.backends.filesystemcache import FileSystemCache
 
 logger = logging.getLogger()

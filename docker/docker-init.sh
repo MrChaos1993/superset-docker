@@ -38,6 +38,11 @@ Init Step ${1}/${STEP_CNT} [${2}] -- ${3}
 EOF
 }
 ADMIN_PASSWORD="admin"
+
+if [ "$SUPERSET_ADMIN_PASSWORD" != "" ]; then
+    ADMIN_PASSWORD=$SUPERSET_ADMIN_PASSWORD
+fi
+
 # If Cypress run – overwrite the password for admin and export env variables
 if [ "$CYPRESS_CONFIG" == "true" ]; then
     ADMIN_PASSWORD="general"
