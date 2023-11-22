@@ -1,3 +1,4 @@
 trino
 clickhouse-connect
 psycopg2
+authlib
