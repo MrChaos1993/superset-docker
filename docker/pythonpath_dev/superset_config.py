@@ -24,6 +24,7 @@ import logging
 import os
 
 from flask_caching.backends.filesystemcache import FileSystemCache
+from flask_appbuilder.security.manager import AUTH_OAUTH
 
 logger = logging.getLogger()
 
@@ -75,6 +76,33 @@ WEBDRIVER_BASEURL = "http://superset:8088/"
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
 
 SQLLAB_CTAS_NO_LIMIT = True
+
+AUTH_TYPE = AUTH_OAUTH
+OAUTH_PROVIDERS = [
+        {
+            "name": "google",
+            "icon": "fa-google",
+            "token_key": "access_token",
+            "remote_app": {
+                "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+                "client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
+                "api_base_url": "https://www.googleapis.com/oauth2/v2/",
+                "client_kwargs": {"scope": "email profile"},
+                "request_token_url": None,
+                "access_token_url": "https://oauth2.googleapis.com/token",
+                "authorize_url": "https://accounts.google.com/o/oauth2/auth",
+                "authorize_params": {"hd": os.getenv("AUTH_DOMAIN", "")}
+            },
+        }
+    ]
+
+# Will allow user self registration, allowing to create Flask users from Authorized User
+AUTH_USER_REGISTRATION = True
+
+# The default user self registration role
+AUTH_USER_REGISTRATION_ROLE = 'Admin'
+
+AUTH_ROLE_ADMIN = 'Admin'
 
 #
 # Optionally import superset_config_docker.py (which will have been included on
