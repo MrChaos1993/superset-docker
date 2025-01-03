@@ -1,4 +1,4 @@
 trino
 clickhouse-connect
-psycopg2
+psycopg2-binary
 authlib
